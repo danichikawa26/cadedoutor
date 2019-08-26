@@ -10,39 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_26_174659) do
+ActiveRecord::Schema.define(version: 2019_08_26_182804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "areas", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "specialty_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["specialty_id"], name: "index_areas_on_specialty_id"
-    t.index ["user_id"], name: "index_areas_on_user_id"
-  end
-
   create_table "consultations", force: :cascade do |t|
-    t.bigint "user_id"
+    t.bigint "patient_id"
     t.bigint "offer_id"
     t.boolean "confirmed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["offer_id"], name: "index_consultations_on_offer_id"
-    t.index ["user_id"], name: "index_consultations_on_user_id"
+    t.index ["patient_id"], name: "index_consultations_on_patient_id"
+  end
+
+  create_table "doctor_specialties", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "specialty_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["specialty_id"], name: "index_doctor_specialties_on_specialty_id"
+    t.index ["user_id"], name: "index_doctor_specialties_on_user_id"
   end
 
   create_table "offers", force: :cascade do |t|
     t.datetime "start_date"
     t.datetime "end_date"
-    t.string "specialty"
     t.boolean "available"
-    t.bigint "user_id"
+    t.bigint "doctor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_offers_on_user_id"
+    t.bigint "specialty_id"
+    t.index ["doctor_id"], name: "index_offers_on_doctor_id"
+    t.index ["specialty_id"], name: "index_offers_on_specialty_id"
   end
 
   create_table "specialties", force: :cascade do |t|
@@ -68,9 +69,10 @@ ActiveRecord::Schema.define(version: 2019_08_26_174659) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "areas", "specialties"
-  add_foreign_key "areas", "users"
   add_foreign_key "consultations", "offers"
-  add_foreign_key "consultations", "users"
-  add_foreign_key "offers", "users"
+  add_foreign_key "consultations", "users", column: "patient_id"
+  add_foreign_key "doctor_specialties", "specialties"
+  add_foreign_key "doctor_specialties", "users"
+  add_foreign_key "offers", "specialties"
+  add_foreign_key "offers", "users", column: "doctor_id"
 end
