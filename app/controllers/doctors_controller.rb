@@ -1,5 +1,5 @@
 class DoctorsController < ApplicationController
-
+  before_action :authenticate_user!, except: [:show, :index]
   before_action :set_doctor, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -18,11 +18,15 @@ class DoctorsController < ApplicationController
 
   def create
     @doctor = Doctor.new(doctor_params)
-    @doctor.build(user: @current_user)
-    if @doctor.save
-      redirect_to doctor_path(@doctor)
+    @doctor.user = current_user
+    unless current_user.doctor
+      if @doctor.save
+        redirect_to doctor_path(@doctor)
+      else
+        render :new
+      end
     else
-      render :new
+      redirect_to doctor_path(current_user.doctor)
     end
   end
 
@@ -31,6 +35,7 @@ class DoctorsController < ApplicationController
   end
 
   def edit
+    redirect_to root_path if current_user != @doctor.user
     @specialties = Specialty.all
     set_doctor
   end
@@ -48,7 +53,7 @@ class DoctorsController < ApplicationController
   def destroy
     set_doctor
     @doctor.destroy
-    redirect_to user_path(@current_user)
+    redirect_to root_path
   end
 
   private
