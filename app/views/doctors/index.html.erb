@@ -3,8 +3,10 @@
     <%= render "search_bar" %>
   </div>
   <div class="mt-3">
-    <% @doctors.each do |doctor| %>
-      <%= link_to "doctor.name", "doctor_path" %>
-    <% end %>
+    <ul>
+      <% @doctors.each do |doctor| %>
+        <ul><%= link_to "#{doctor.user.first_name} #{doctor.user.first_name}", doctor_path(doctor) %></ul>
+      <% end %>
+    </ul>
   </div>
 </div>
