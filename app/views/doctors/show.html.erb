@@ -1,16 +1,25 @@
 <div class="container">
   <div class="flex">
-    <div class="col-6 rounded-circle" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.45)), url('https://source.unsplash.com/400x300/?cocktail,<%=cocktail_item.name%>');">
+    <div class="col-6 rounded-circle" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.45)), url('https://source.unsplash.com/400x300/?cocktail');">
     </div>
     <div class="col-6">
       <h1><%= @doctor.user.first_name.capitalize %></h1>
-      <h3><%= @doctor.specialty.name %></h3>
-      <p><%= @doctor.professional_register.uppercase %></p>
+      <h3>
+        <% specialties = [] %>
+        <% @doctor.specialties.each do |specialty| %>
+          <% specialties << specialty.name %>
+        <% end %>
+        <%= specialties.join(', ') %>
+      </h3>
+      <p><%= @doctor.professional_register.upcase %></p>
       <p><%= @doctor.address.capitalize %></p>
     </div>
   </div>
-  <%= link_to( @doctor, method: :delete, data: { confirm: 'Are you sure?' }) do %>
-    <i class="far fa-trash-alt mr-2"></i> Delete my doctor account
-  <% end %>
-  <%= link_to "Edit my info", "edit_doctor_path" %>
+  <div class="flex mr-3">
+    <%= link_to( @doctor, method: :delete, data: { confirm: 'Are you sure?' }) do %>
+      <i class="far fa-trash-alt mr-2"></i> Delete my doctor account
+    <% end %>
+    |
+    <%= link_to "Edit my info", edit_doctor_path(@doctor) %>
+  </div>
 </div>

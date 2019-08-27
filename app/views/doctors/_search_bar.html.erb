@@ -1,14 +1,10 @@
-<div class="flex inline">
+<div class="flex form-inline">
   <%= form_tag doctors_path, method: :get do %>
-    <div>
       <%= text_field_tag :query,
         params[:query],
-        class: "form-control",
+        class: "form-control w-auto",
         placeholder: "Find doctors by a speciality"
       %>
-    </div>
-    <div>
       <%= submit_tag "Search", class: "btn btn-primary" %>
-    </div>
   <% end %>
 </div>
