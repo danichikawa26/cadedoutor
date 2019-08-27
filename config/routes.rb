@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  resources :users, only: %i[show]
+
   resources :consultations, only: %i[index destroy] #show all consultations of a logged in patient; deletes consultation
 
   resources :offers, only: %i[index] do #all offers by a given doctor, if params[:user_id] exists
