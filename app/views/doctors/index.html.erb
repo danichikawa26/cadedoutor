@@ -1,14 +1,26 @@
-<div class="container">
-  <div class="bg-light">
-    <%= render "search_bar" %>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1548101307-a757d5f06d27?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80');">
+  <div class="container">
+    <h1>Book your appointment now!</h1>
+    <p>Choose from several qualified doctors to help in your recovery process.</p>
   </div>
-  <div class="mt-3">
-    <ul>
-      <% @doctors.each do |doctor| %>
-        <% if current_user != doctor.user %>
-          <ul><%= link_to "#{doctor.user.first_name} #{doctor.user.first_name}", doctor_path(doctor) %></ul>
-        <% end %>
+  <div class="flex form-inline" style="justify-content: space-around;">
+    <%= form_tag doctors_path, method: :get do %>
+        <%= text_field_tag :query,
+          params[:query],
+          class: "form-control w-auto",
+          placeholder: "Find doctors by a speciality"
+        %>
+        <%= submit_tag "Search", class: "btn btn-flat" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="mt-3">
+  <ul>
+    <% @doctors.each do |doctor| %>
+      <% if current_user != doctor.user %>
+        <ul><%= link_to "#{doctor.user.first_name} #{doctor.user.first_name}", doctor_path(doctor) %></ul>
       <% end %>
-    </ul>
-  </div>
+    <% end %>
+  </ul>
 </div>
