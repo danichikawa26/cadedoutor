@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_26_192633) do
+ActiveRecord::Schema.define(version: 2019_08_26_174659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "consultations", force: :cascade do |t|
-    t.bigint "patient_id"
+    t.bigint "user_id"
     t.bigint "offer_id"
-    t.boolean "confirmed"
+    t.boolean "confirmed", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["offer_id"], name: "index_consultations_on_offer_id"
-    t.index ["patient_id"], name: "index_consultations_on_patient_id"
+    t.index ["user_id"], name: "index_consultations_on_user_id"
   end
 
   create_table "doctor_specialties", force: :cascade do |t|
@@ -34,14 +34,23 @@ ActiveRecord::Schema.define(version: 2019_08_26_192633) do
     t.index ["specialty_id"], name: "index_doctor_specialties_on_specialty_id"
   end
 
+  create_table "doctors", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "professional_register"
+    t.text "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_doctors_on_user_id"
+  end
+
   create_table "offers", force: :cascade do |t|
     t.datetime "start_date"
     t.datetime "end_date"
-    t.boolean "available"
+    t.bigint "specialty_id"
+    t.boolean "available", default: true
     t.bigint "doctor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "specialty_id"
     t.index ["doctor_id"], name: "index_offers_on_doctor_id"
     t.index ["specialty_id"], name: "index_offers_on_specialty_id"
   end
@@ -70,9 +79,10 @@ ActiveRecord::Schema.define(version: 2019_08_26_192633) do
   end
 
   add_foreign_key "consultations", "offers"
-  add_foreign_key "consultations", "users", column: "patient_id"
+  add_foreign_key "consultations", "users"
+  add_foreign_key "doctor_specialties", "doctors"
   add_foreign_key "doctor_specialties", "specialties"
-  add_foreign_key "doctor_specialties", "users", column: "doctor_id"
+  add_foreign_key "doctors", "users"
+  add_foreign_key "offers", "doctors"
   add_foreign_key "offers", "specialties"
-  add_foreign_key "offers", "users", column: "doctor_id"
 end
