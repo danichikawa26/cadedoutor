@@ -2,7 +2,7 @@
   <div class="mt-3">
     <h1>Avaliable consultations</h1>
     <% @offers.each do |offer| %>
-      <h3>Consultation begins <%= link_to offer.start_date, offer_path(offer) %></h3>
+      <h3>Consultation begins <%= link_to offer.start_date, offer_path(offer) if offer.available %></h3>
     <% end %>
   </div>
   <%= link_to "Back", consultations_path %>
