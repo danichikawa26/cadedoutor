@@ -4,11 +4,11 @@ class Doctor::OffersController < ApplicationController
   end
 
   def create
-    raise
     @offer = Offer.new(offer_params)
+    @offer.doctor_id = current_user.id
     respond_to do |format|
       if @offer.save
-        render 'doctor'
+        render doctor_offers_path
       else
         format.html { render :new }
         format.json { render json: @offer.errors, status: :unprocessable_entity }
