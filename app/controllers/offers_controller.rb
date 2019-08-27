@@ -1,4 +1,12 @@
 class OffersController < ApplicationController
+ 
+  def index
+  end
+
+  def show
+    @offer = Offer.find(params[:id])
+  end
+  
   def new
     @offer = Offer.new
   end
@@ -43,5 +51,4 @@ class OffersController < ApplicationController
 
   def offer_params
     params.require(:offer).permit(:start_date, :end_date, :specialty_id)
-  end
 end
