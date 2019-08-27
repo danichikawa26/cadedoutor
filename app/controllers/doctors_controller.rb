@@ -4,11 +4,13 @@ class DoctorsController < ApplicationController
 
   def index
     @doctors = Doctor.all
-    # if params[:query].present?
-    #   @doctors = Doctor.where(doctor.user.specialty.name: params[:query])
-    # else
-    #   @doctors = Doctor.all
-    # end
+    unless params[:query].nil?
+      @selected_doctors = @doctors.select do |doc|
+        doc_spec = doc.specialties[0].name
+        query = params[:query].capitalize
+        doc_spec.include?(query)
+      end
+    end
   end
 
   def new
