@@ -6,5 +6,5 @@ class Doctor < ApplicationRecord
   has_many :specialties, through: :doctor_specialties
 
   validates :professional_register, presence: true, uniqueness: true
-  validates :address
+  validates :address, presence: true
 end
