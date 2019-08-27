@@ -3,9 +3,9 @@ class CreateOffers < ActiveRecord::Migration[5.2]
     create_table :offers do |t|
       t.datetime :start_date
       t.datetime :end_date
-      t.string :specialty
-      t.boolean :available
-      t.references :user, foreign_key: true
+      t.references :specialty, foreign_key: true
+      t.boolean :available, default: true
+      t.references :doctor, foreign_key: true
 
       t.timestamps
     end
