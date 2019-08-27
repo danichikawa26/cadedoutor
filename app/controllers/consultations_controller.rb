@@ -7,10 +7,12 @@ class ConsultationsController < ApplicationController
     @offer = Offer.new(params[:id])
     @consultation = Consultation.new(offer: @offer)
     @consultation.user_id = current_user
-    if @consultation.save
+    if @consultation.save!
+      raise
+      @offer.avaliable = false
+      @offer.save
+
       redirect_to consultations_path
-    else
-      render :new
     end
   end
 end
