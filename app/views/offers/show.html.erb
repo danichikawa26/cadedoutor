@@ -1,8 +1,8 @@
 <div class="container">
-  <h2>Consultation with <%= @offer.doctor.first_name %></h2>
+  <h2>Consultation with <%= @offer.doctor.user.first_name %></h2>
   <p>Consultation begins <strong><%= @offer.start_date %></strong></p>
   <p>Consultation ends <strong><%= @offer.end_date %></strong></p>
 
-  <p><%= link_to "Join on consultation?", offer_consultation_path(@offer) %></p>
+  <p><%= link_to "Join on consultation?", offer_consultations_path(@offer), method: 'post' %></p>
   <p><%= link_to "Back", offers_path %></p>
 </div>

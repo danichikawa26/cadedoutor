@@ -1,6 +1,6 @@
 class ConsultationsController < ApplicationController
   def index
-    @consultations = User.find(current_user.id).consultations
+    @consultations = current_user.consultations
   end
 
   def destroy
@@ -10,11 +10,11 @@ class ConsultationsController < ApplicationController
     def create
     @offer = Offer.new(params[:id])
     @consultation = Consultation.new(offer: @offer)
-    @consultation.user_id = current_user
-    if @consultation.save
+    @consultation.user = current_user
+    if @consultation.save!
+      @offer.available = false
+      @offer.save
       redirect_to consultations_path
-    else
-      render :new
     end
   end
 end
