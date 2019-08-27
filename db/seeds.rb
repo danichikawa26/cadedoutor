@@ -13,47 +13,40 @@ puts 'Deleting data from database'
 
 Consultation.destroy_all
 DoctorSpecialty.destroy_all
-Offer.destroy_all
 Specialty.destroy_all
-Doctor.destroy_all
+# Offer.destroy_all
+# Doctor.destroy_all
 User.destroy_all
 
 puts 'Creating new data'
 
 cardiology = Specialty.create!(name: 'Cardiology')
 
-fulano = User.create!(first_name: 'Fulano', last_name: 'Branquinho', city: 'São Paulo',
+fulano = User.new(first_name: 'Fulano', last_name: 'Branquinho', city: 'São Paulo',
   email: 'fulano@cadedoutor.com',password: 'fulano123', doctor: nil)
-dr_fulano = Doctor.create!(professional_register: '5060258', address: 'Rua da Glória, 195, cj 20', user: fulano)
+dr_fulano = Doctor.new(professional_register: '5060258', address: 'Rua da Glória, 195, cj 20', user: fulano)
 fulano.doctor = dr_fulano
-dr_fulano.specialty = cardiology
+dr_fulano.specialties = [cardiology]
 fulano.save!
+dr_fulano.save!
 
-ciclana = User.create!(first_name: 'Ciclana', last_name: 'Ichigawa', city: 'São Paulo',
+ciclana = User.new(first_name: 'Ciclana', last_name: 'Ichigawa', city: 'São Paulo',
   email: 'ciclana@cadedoutor.com', password: 'ciclana123', doctor: nil)
-dr_ciclana = Doctor.create!(professional_register: '2585060', address: 'Rua da Vitória, 591, cj 200', user: ciclana)
+dr_ciclana = Doctor.new(professional_register: '2585060', address: 'Rua da Vitória, 591, cj 200', user: ciclana)
 ciclana.doctor = dr_ciclana
-dr_ciclana.specialty = cardiology
+dr_ciclana.specialties = [cardiology]
 ciclana.save!
+dr_ciclana.save!
 
-beltrana = User.create!(first_name: 'Beltrana', last_name: 'Vasconcelos', city: 'São Paulo',
+beltrana = User.new(first_name: 'Beltrana', last_name: 'Vasconcelos', city: 'São Paulo',
   email: 'beltrana@cadedoutor.com', password: 'beltrana123',doctor: nil)
-dr_beltrana = Doctor.create!(professional_register: '2585060', address: 'Rua do Sucesso, 519, cj 220', user: beltrana)
+dr_beltrana = Doctor.new(professional_register: '2586960', address: 'Rua do Sucesso, 519, cj 220', user: beltrana)
 beltrana.doctor = dr_beltrana
-dr_beltrana.specialty = cardiology
+dr_beltrana.specialties = [cardiology]
 beltrana.save!
+dr_beltrana.save!
 
-patien = User.create!(first_name: 'Futrano', last_name: 'Coelho', city: 'São Paulo',
+patient = User.create!(first_name: 'Futrano', last_name: 'Coelho', city: 'São Paulo',
   email: 'futrano@cadedoutor.com', password: 'futrano123', doctor: nil)
 
 puts 'Successful'
-puts '---'
-puts fulano
-puts dr_fulano.specialty
-puts '---'
-puts ciclana
-puts ciclana.specialty
-puts '---'
-puts beltrana
-puts beltrana.specialty
-
