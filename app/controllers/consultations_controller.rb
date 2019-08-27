@@ -1,7 +1,7 @@
 class ConsultationsController < ApplicationController
   def index
-    @consultations = current_user.id.consultations
-    @offers = current_user.id.doctor.offers
+    @consultations = current_user.consultations
+    @offers = current_user.doctor.offers unless current_user.doctor.nil?
   end
 
   def destroy
