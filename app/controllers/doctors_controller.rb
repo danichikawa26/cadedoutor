@@ -1,4 +1,5 @@
 class DoctorsController < ApplicationController
+
   before_action :set_doctor, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -54,5 +55,4 @@ class DoctorsController < ApplicationController
   def set_doctor
     @doctor = Doctor.find(params[:id])
   end
-
 end
