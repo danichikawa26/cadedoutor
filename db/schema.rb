@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2019_08_27_161100) do
 
   create_table "doctor_specialties", force: :cascade do |t|
     t.bigint "doctor_id"
-    t.bigint "specialrailty_id"
+    t.bigint "specialty_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["doctor_id"], name: "index_doctor_specialties_on_doctor_id"
