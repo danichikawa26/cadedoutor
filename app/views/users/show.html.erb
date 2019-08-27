@@ -1,0 +1,16 @@
+<div class="container-fluid">
+  <h1>Hello, <%= current_user.first_name %> </h1>
+
+  <h2>Your consultations</h2>
+
+  <% @consultations.each do |consultation| %>
+    <%= consultation.offer.start_date %>
+    <%= consultation.offer.doctor.first_name %>
+    <%= consultation.offer.doctor.last_name %>
+    <%= consultation.offer.specialty.name %>
+    <%= link_to 'Cancel appointment', consultation_path(consultation), method: :delete, data: { confirm: 'Are you sure you want to cancel?' } %></td>
+  <% end %>
+
+  <%= link_to 'Add new consultation', doctors_path %>
+
+</div>

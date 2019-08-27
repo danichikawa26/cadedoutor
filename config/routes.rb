@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+
+  resources :users, only: %i[show]
+
   resources :doctors
+
 
   resources :consultations, only: %i[index destroy] #show all consultations of a logged in patient; deletes consultation
 
