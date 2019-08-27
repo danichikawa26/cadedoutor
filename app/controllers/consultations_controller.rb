@@ -11,7 +11,7 @@ class ConsultationsController < ApplicationController
     @consultation.destroy
   end
     def create
-    @offer = Offer.find(params[:offer_id])
+    @offer = Offer.new(params[:id])
     @consultation = Consultation.new(offer: @offer)
     @consultation.user = current_user
     if @consultation.save!
