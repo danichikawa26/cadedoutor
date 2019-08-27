@@ -5,7 +5,7 @@ class DoctorsController < ApplicationController
   def index
     @doctors = Doctor.all
     # if params[:query].present?
-    #   @doctors = Doctor.where(doctor.specialty.name: params[:query])
+    #   @doctors = Doctor.where(doctor.user.specialty.name: params[:query])
     # else
     #   @doctors = Doctor.all
     # end
@@ -38,6 +38,11 @@ class DoctorsController < ApplicationController
   def update
     set_doctor
     @doctor.save
+    if @doctor.save
+      redirect_to doctor_path(@doctor)
+    else
+      render :new
+    end
   end
 
   def destroy
