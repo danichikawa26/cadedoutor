@@ -1,6 +1,7 @@
 class ConsultationsController < ApplicationController
   def index
     @consultations = User.find(current_user.id).consultations
+    @offers = User.find(current_user.id).doctor.offers
   end
 
   def destroy
