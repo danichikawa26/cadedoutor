@@ -1,4 +1,8 @@
 class ConsultationsController < ApplicationController
+  def index
+    @consultations = User.find(current_user.id).consultations
+  end
+
   def destroy
     @consultation = Consultation.find(params[:id])
     @consultation.destroy

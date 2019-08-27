@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root to: 'offers#index' #index all offers, params[user_id] == nil
+  devise_for :views
+  root to: 'consultations#index' #index all offers, params[user_id] == nil
 
   devise_for :users
 
