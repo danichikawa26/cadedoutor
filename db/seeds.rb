@@ -9,11 +9,11 @@
 
 puts 'Deleting database'
 
-User.destroy_all
-Specialty.destroy_all
-Offer.destroy_all
 Consultation.destroy_all
 DoctorSpecialty.destroy_all
+Offer.destroy_all
+Specialty.destroy_all
+User.destroy_all
 
 puts 'Creating data'
 
