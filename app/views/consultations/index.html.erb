@@ -1,51 +1,99 @@
-<div class="container-fluid">
+<div class="container mt-navbar">
 
     <h1>Hello, <%= current_user.first_name %> </h1>
 
-    <h2>Your consultations</h2>
-      <% @my_consultations.each do |consultation| %>
-        <ul>
-          <li>
-            <%= consultation.offer.start_date %>
-            <%= consultation.offer.doctor.user.first_name %>
-            <%= consultation.offer.doctor.user.last_name %>
-            <%= consultation.offer.specialty.name %>
-            <%= link_to 'Cancel appointment', consultation_path(consultation), method: :delete, data: { confirm: 'Are you sure you want to cancel?' } %></td>
-          </li>
-        </ul>
-      <% end %>
-    <%= link_to 'Add new consultation', doctors_path %>
+    <br>
+    <br>
   <% unless current_user.doctor.nil? %>
-
     <h2>Your consultations as a doctor</h2>
-      <% @consultations.each do |consultation| %>
-        <ul>
-          <li>
-            <%= consultation.offer.start_date %>
-            <%= consultation.user.first_name %>
-            <%= consultation.user.last_name %>
-            <%= consultation.offer.specialty.name %>
-            <%= link_to 'Cancel appointment', consultation_path(consultation), method: :delete, data: { confirm: 'Are you sure you want to cancel? The patient may get pissed!' } %></td>
-          </li>
-        </ul>
+    <br>
+      <% if @consultations[0].nil? %>
+        <div class="notification">
+          <img class="avatar-large" src="https://image.flaticon.com/icons/svg/1828/1828975.svg" alt="exclamation mark">
+          <div class="notification-content">
+            <p>You currently have no scheduled consultations as a doctor</p>
+          </div>
+        </div>
       <% end %>
+
+      <% @consultations.each do |consultation| %>
+        <div class="notification">
+          <img class="avatar" src="https://source.unsplash.com/900x900/?person,<%= rand(200) %>"
+                  alt="profile picture">
+          <div class="notification-content">
+            <p><small><%= consultation.offer.start_date %> - <%= consultation.offer.end_date %></small></p>
+            <p><strong><%= consultation.offer.specialty.name %></strong> consultation with patient <strong><%= consultation.user.first_name %> <%= consultation.user.last_name %></strong></p>
+          </div>
+
+          <div class="notification-actions">
+            <%= link_to 'Cancel appointment', consultation_path(consultation), method: :delete, data: { confirm: 'Are you sure you want to cancel? The patient may get pissed!' } %>
+          </div>
+        </div>
+      <% end %>
+      <br>
+      <hr>
+      <br>
+
+
     <h2>Your available time slots</h2>
+    <br>
 
     <% @offers.each do |offer| %>
       <% if offer.available == true %>
-        <ul>
-          <li>
-            <%= offer.start_date %>
-            <%= offer.doctor.user.first_name %>
-            <%= offer.doctor.user.last_name %>
-            <%= offer.specialty.name %>
-            <%= link_to 'Remove time slot', doctor_offer_path(offer), method: :delete, data: { confirm: 'Are you sure you want to remove this time slot?' } %></td>
+        <div class="notification">
+          <img src='https://image.flaticon.com/icons/svg/109/109613.svg' class="avatar-large" />
+          <div class="notification-content">
+            <p><small><%= offer.start_date %> - <%= offer.end_date %></small></p>
+            <p>You offered one <strong><%= offer.specialty.name %></strong> consultation for this time period</strong></p>
+          </div>
+
+          <div class="notification-actions">
             <%= link_to 'Edit time slot', edit_doctor_offer_path(offer) %>
-          </li>
-        </ul>
+            <%= link_to 'Remove time slot', doctor_offer_path(offer), method: :delete, data: { confirm: 'Are you sure you want to remove this time slot?' } %>
+
+          </div>
+        </div>
       <% end %>
     <% end %>
-    <%= link_to 'Add a new time slot', new_doctor_offer_path %>
+    <%= link_to 'Add a new time slot', new_doctor_offer_path, class: "btn btn-info" %>
+    <br>
+    <hr>
     <br>
   <% end %>
+
+
+    <h2>Your consultations
+        <% if current_user.doctor %>
+          as a patient
+        <% end %>
+    </h2>
+    <br>
+      <% if @my_consultations[0].nil? %>
+        <div class="notification">
+          <img class="avatar-large" src="https://image.flaticon.com/icons/svg/1828/1828975.svg" alt="exclamation mark">
+          <div class="notification-content">
+            <p>You currently have no scheduled consultations as a patient</p>
+          </div>
+        </div>
+      <% end %>
+
+      <% @my_consultations.each do |consultation| %>
+      <div class="notification">
+        <img class="avatar-large" src="https://source.unsplash.com/900x900/?nurse,<%= rand(200) %>"
+          alt="profile picture">
+        <div class="notification-content">
+          <p><small><%= consultation.offer.start_date %> - <%= consultation.offer.end_date %></small></p>
+          <p><strong><%= consultation.offer.specialty.name %></strong> consultation with doctor <strong><%= consultation.offer.doctor.user.first_name %> <%= consultation.offer.doctor.user.last_name %></strong></p>
+        </div>
+
+        <div class="notification-actions">
+          <%= link_to 'Cancel appointment', consultation_path(consultation), method: :delete, data: { confirm: 'Are you sure you want to cancel?' } %>
+        </div>
+      </div>
+      <% end %>
+    <%= link_to 'Add new consultation', doctors_path, class: "btn btn-info" %>
+
+    <br>
+    <hr>
+    <br>
 </div>
