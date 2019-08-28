@@ -7,5 +7,7 @@
 
 
 $(document).ready(function() {
-  $('#calendar').fullCalendar({})
+  $('#calendar').fullCalendar({
+    events: '/consultations.json'
+  })
 })
