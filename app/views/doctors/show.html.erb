@@ -15,11 +15,13 @@
       <p><%= @doctor.address.capitalize %></p>
     </div>
   </div>
-  <div class="flex mr-3">
-    <%= link_to( @doctor, method: :delete, data: { confirm: 'Are you sure?' }) do %>
-      <i class="far fa-trash-alt mr-2"></i> Delete my doctor account
-    <% end %>
-    |
-    <%= link_to "Edit my info", edit_doctor_path(@doctor) %>
-  </div>
+  <% if current_user == @doctor.user %>
+    <div class="flex mr-3">
+      <%= link_to( @doctor, method: :delete, data: { confirm: 'Are you sure?' }) do %>
+        <i class="far fa-trash-alt mr-2"></i> Delete my doctor account
+      <% end %>
+      |
+      <%= link_to "Edit my info", edit_doctor_path(@doctor) %>
+    </div>
+  <% end %>
 </div>
