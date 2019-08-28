@@ -1,9 +1,9 @@
 //= require jquery
 //= require select2
 //= require rails-ujs
-//= require_tree .
 //= require moment
 //= require fullcalendar
+//= require_tree .
 
 
 $(document).ready(function() {
