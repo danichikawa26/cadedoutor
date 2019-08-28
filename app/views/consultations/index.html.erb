@@ -10,7 +10,7 @@
             <%= consultation.offer.doctor.user.first_name %>
             <%= consultation.offer.doctor.user.last_name %>
             <%= consultation.offer.specialty.name %>
-            <%= link_to 'Cancel appointment', consultation_path(consultation), method: :delete, data: { confirm: 'Are you sure you want to cancel?' } %></td>
+            <%= link_to 'Cancel appointment', consultation_path(consultation), method: :delete, data: { confirm: 'Are you sure you want to cancel?' } %>
           </li>
         </ul>
       <% end %>
@@ -25,7 +25,7 @@
             <%= consultation.user.first_name %>
             <%= consultation.user.last_name %>
             <%= consultation.offer.specialty.name %>
-            <%= link_to 'Cancel appointment', consultation_path(consultation), method: :delete, data: { confirm: 'Are you sure you want to cancel? The patient may get pissed!' } %></td>
+            <%= link_to 'Cancel appointment', consultation_path(consultation), method: :delete, data: { confirm: 'Are you sure you want to cancel? The patient may get pissed!' } %>
           </li>
         </ul>
       <% end %>
@@ -39,7 +39,7 @@
             <%= offer.doctor.user.first_name %>
             <%= offer.doctor.user.last_name %>
             <%= offer.specialty.name %>
-            <%= link_to 'Remove time slot', doctor_offer_path(offer), method: :delete, data: { confirm: 'Are you sure you want to remove this time slot?' } %></td>
+            <%= link_to 'Remove time slot', doctor_offer_path(offer), method: :delete, data: { confirm: 'Are you sure you want to remove this time slot?' } %>
             <%= link_to 'Edit time slot', edit_doctor_offer_path(offer) %>
           </li>
         </ul>
@@ -48,4 +48,8 @@
     <%= link_to 'Add a new time slot', new_doctor_offer_path %>
     <br>
   <% end %>
+</div>
+
+<div class="container-fluid">
+  <div id="calendar"></div>
 </div>
