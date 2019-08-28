@@ -53,6 +53,7 @@ class DoctorsController < ApplicationController
   end
 
   def destroy
+    redirect_to root_path if current_user != @doctor.user
     set_doctor
     @doctor.destroy
     redirect_to root_path
