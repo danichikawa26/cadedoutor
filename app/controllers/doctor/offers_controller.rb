@@ -6,13 +6,10 @@ class Doctor::OffersController < ApplicationController
   def create
     @offer = Offer.new(offer_params)
     @offer.doctor_id = current_user.id
-    respond_to do |format|
-      if @offer.save
-        render doctor_offers_path
-      else
-        format.html { render :new }
-        format.json { render json: @offer.errors, status: :unprocessable_entity }
-      end
+    if @offer.save
+      redirect_to consultations_path(current_user)
+    else
+      render '/doctor/offers/new'
     end
   end
 
@@ -22,22 +19,17 @@ class Doctor::OffersController < ApplicationController
 
   def update
     @offer = Offer.find(params[:id])
-    respond_to do |format|
-      if @offer.update(offer_params)
-        render 'doctor'
-      else
-        format.html { render :edit }
-        format.json { render json: @offer.errors, status: :unprocessable_entity }
-      end
+    if @offer.update(offer_params)
+      redirect_to consultations_path(current_user)
+    else
+      render '/doctor/offers/:id/edit'
     end
   end
 
   def destroy
+    @offer = Offer.find(params[:id])
     @offer.destroy
-    respond_to do |format|
-      format.html { redirect_to doctor_path(current_user), notice: 'Offer was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to consultations_path(current_user)
   end
 
   private
