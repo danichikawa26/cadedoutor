@@ -3,11 +3,13 @@ class DoctorsController < ApplicationController
   before_action :set_doctor, only: [:show, :edit, :update, :destroy]
 
   def index
+    @specialities = Specialty.all
     @doctors = Doctor.all
     unless params[:query].nil?
       @selected_doctors = @doctors.select do |doc|
         doc_spec = doc.specialties[0].name
         query = params[:query].capitalize
+
         doc_spec.include?(query)
       end
     end
