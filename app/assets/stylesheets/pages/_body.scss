@@ -1,0 +1,21 @@
+body {
+  background-color: $extra-light-blue;
+}
+
+h1, h2, h3 {
+  color: $black
+}
+
+.mt-navbar {
+  margin-top: 66px;
+}
+
+a {
+  color: $gray;
+
+  &:hover {
+  text-decoration: none;
+  color: $gray;
+  }
+}
+
