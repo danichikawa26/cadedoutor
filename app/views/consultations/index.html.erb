@@ -7,8 +7,8 @@
 
     <% @consultations.each do |consultation| %>
       <%= consultation.offer.start_date %>
-      <%= consultation.offer.doctor.first_name %>
-      <%= consultation.offer.doctor.last_name %>
+      <%= consultation.offer.doctor.user.first_name %>
+      <%= consultation.offer.doctor.user.last_name %>
       <%= consultation.offer.specialty.name %>
       <%= link_to 'Cancel appointment', consultation_path(consultation), method: :delete, data: { confirm: 'Are you sure you want to cancel?' } %></td>
     <% end %>
@@ -21,8 +21,8 @@
 
     <% @consultations.each do |consultation| %>
       <%= consultation.offer.start_date %>
-      <%= consultation.offer.doctor.first_name %>
-      <%= consultation.offer.doctor.last_name %>
+      <%= consultation.offer.doctor.user.first_name %>
+      <%= consultation.offer.doctor.user.last_name %>
       <%= consultation.offer.specialty.name %>
       <%= link_to 'Cancel appointment', consultation_path(consultation), method: :delete, data: { confirm: 'Are you sure you want to cancel? The patient may get pissed!' } %></td>
     <% end %>
@@ -31,10 +31,10 @@
 
     <% @offers.each do |offer| %>
       <%= offer.start_date %>
-      <%= offer.doctor.first_name %>
-      <%= offer.doctor.last_name %>
+      <%= offer.doctor.user.first_name %>
+      <%= offer.doctor.user.last_name %>
       <%= offer.specialty.name %>
-      <%= link_to 'Remove time slot', consultation_path(consultation), method: :delete, data: { confirm: 'Are you sure you want to remove this time slot?' } %></td>
+      <%= link_to 'Remove time slot', consultation_path(offer), method: :delete, data: { confirm: 'Are you sure you want to remove this time slot?' } %></td>
     <% end %>
     <%= link_to 'Add a new time slot', new_doctor_offer_path %>
   <% end %>
