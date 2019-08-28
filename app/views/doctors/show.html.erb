@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-navbar">
   <div class="flex">
     <div class="col-6 rounded-circle" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.45)), url('https://source.unsplash.com/400x300/?cocktail');">
     </div>
@@ -24,12 +24,13 @@
       <%= link_to "Edit my info", edit_doctor_path(@doctor) %>
     </div>
   <% end %>
-
+  <% if current_user != @doctor.user %>
       <% @doctor.offers.each do |offer| %>
         <% if offer.available == true %>
           <p><%= offer.start_date %> <%= link_to "Join consultation?", offer_consultations_path(offer), method: :post %></p>
         <% end %>
       <% end %>
+  <% end %>
 
       <%= link_to "Back", root_path %>
 </div>

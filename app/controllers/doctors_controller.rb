@@ -3,11 +3,13 @@ class DoctorsController < ApplicationController
   before_action :set_doctor, only: [:show, :edit, :update, :destroy]
 
   def index
+    @specialities = Specialty.all
     @doctors = Doctor.all
     unless params[:query].nil?
       @selected_doctors = @doctors.select do |doc|
         doc_spec = doc.specialties[0].name
         query = params[:query].capitalize
+
         doc_spec.include?(query)
       end
     end
@@ -22,7 +24,9 @@ class DoctorsController < ApplicationController
     @doctor = Doctor.new(doctor_params)
     @doctor.user = current_user
     unless current_user.doctor
-      if @doctor.save
+      if @doctor.save!
+        current_user.doctor = @doctor
+        current_user.save!
         redirect_to doctor_path(@doctor)
       else
         render :new
@@ -43,9 +47,13 @@ class DoctorsController < ApplicationController
   end
 
   def update
-    set_doctor
-    @doctor.save
-    if @doctor.save
+
+    if @doctor.update(doctor_params)
+      DoctorSpecialty.where(doctor: @doctor).destroy_all
+      params[:doctor][:specialty_ids].each do |specialty_id|
+        specialty = Specialty.find(specialty_id)
+        DoctorSpecialty.create(doctor: @doctor, specialty: specialty)
+      end
       redirect_to doctor_path(@doctor)
     else
       render :new
