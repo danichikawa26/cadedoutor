@@ -4,13 +4,11 @@
     <p>Choose from several qualified doctors to help in your recovery process.</p>
     <div class="flex form-inline">
       <%= form_tag doctors_path, method: :get do %>
-          <%= text_field_tag :query,
-            params[:query],
-            class: "form-control w-auto",
-            style: "width: 700px !important;",
-            placeholder: "Find doctors by a speciality"
-          %>
-          <%= submit_tag "Search", class: "btn btn-flat" %>
+
+        <%= select_tag 'query', options_from_collection_for_select(@specialities, 'name', 'name'),
+         class: 'form-control doctor-form' %>
+
+        <%= submit_tag "Search", class: "btn btn-flat" %>
       <% end %>
     </div>
   </div>
@@ -59,7 +57,7 @@
   <% if params[:query].nil? || (params[:query] == '') %>
 
     <h2>Professionals from our community</h2>
-    <div class="row">
+    <div class="row" id="result">
       <% @doctors.each do |doctor| %>
         <% if current_user != doctor.user %>
         <%= link_to doctor_path(doctor) do %>
