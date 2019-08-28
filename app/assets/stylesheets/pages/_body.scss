@@ -9,3 +9,13 @@ h1, h2, h3 {
 .mt-navbar {
   margin-top: 66px;
 }
+
+a {
+  color: $gray;
+
+  &:hover {
+  text-decoration: none;
+  color: $gray;
+  }
+}
+
