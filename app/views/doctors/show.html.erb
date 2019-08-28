@@ -24,4 +24,12 @@
       <%= link_to "Edit my info", edit_doctor_path(@doctor) %>
     </div>
   <% end %>
+
+      <% @doctor.offers.each do |offer| %>
+        <% if offer.available == true %>
+          <p><%= offer.start_date %> <%= link_to "Join consultation?", offer_consultations_path(offer), method: :post %></p>
+        <% end %>
+      <% end %>
+
+      <%= link_to "Back", root_path %>
 </div>
