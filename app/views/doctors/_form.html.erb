@@ -5,7 +5,7 @@
 
   <div class="form-inputs">
     <%= f.input :address, as: :string %>
-    <%= f.input :specialties, as: :check_boxes, collection: @specialties, label: "Your specialty"%>
+    <%= f.association :specialties, as: :check_boxes, collection: @specialties, label: "Your specialty", include_hidden: false%>
     <%= f.input :professional_register %>
   </div>
 

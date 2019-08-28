@@ -45,9 +45,13 @@ class DoctorsController < ApplicationController
   end
 
   def update
-    set_doctor
-    @doctor.save
-    if @doctor.save
+
+    if @doctor.update(doctor_params)
+      DoctorSpecialty.where(doctor: @doctor).destroy_all
+      params[:doctor][:specialty_ids].each do |specialty_id|
+        specialty = Specialty.find(specialty_id)
+        DoctorSpecialty.create(doctor: @doctor, specialty: specialty)
+      end
       redirect_to doctor_path(@doctor)
     else
       render :new
