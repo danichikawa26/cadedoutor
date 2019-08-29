@@ -7,7 +7,7 @@ class Doctor::OffersController < ApplicationController
     @offer = Offer.new(offer_params)
     @offer.doctor_id = current_user.id
     if @offer.save
-      redirect_to consultations_path(current_user)
+      redirect_to consultations_path
     else
       render '/doctor/offers/new'
     end
@@ -20,7 +20,10 @@ class Doctor::OffersController < ApplicationController
   def update
     @offer = Offer.find(params[:id])
     if @offer.update(offer_params)
-      redirect_to consultations_path(current_user)
+      respond_to do |format|
+        format.html { redirect_to consultations_path}
+        format.json
+      end
     else
       render '/doctor/offers/:id/edit'
     end

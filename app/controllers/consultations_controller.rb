@@ -14,6 +14,7 @@ class ConsultationsController < ApplicationController
     end
     @my_consultations
     @consultations
+    @offer = Offer.new
     @offers = current_user.doctor.offers unless current_user.doctor.nil?
   end
 

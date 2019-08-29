@@ -55,6 +55,8 @@ GEM
       debug_inspector (>= 0.0.1)
     bootsnap (1.4.4)
       msgpack (~> 1.0)
+    bootstrap-daterangepicker-rails (3.0.4)
+      railties (>= 4.0)
     builder (3.2.3)
     byebug (11.0.1)
     coderay (1.1.2)
@@ -218,6 +220,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootsnap
+  bootstrap-daterangepicker-rails
   devise
   dotenv-rails
   faker

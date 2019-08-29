@@ -48,7 +48,6 @@ class DoctorsController < ApplicationController
   end
 
   def update
-
     if @doctor.update(doctor_params)
       DoctorSpecialty.where(doctor: @doctor).destroy_all
       params[:doctor][:specialty_ids].each do |specialty_id|
