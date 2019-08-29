@@ -3,12 +3,11 @@ class DoctorsController < ApplicationController
   before_action :set_doctor, only: [:show, :edit, :update, :destroy]
 
   def index
-    @doctors = Doctor.left_outer_joins(:offers).where.not(offers: {id: nil})
-    @specialities = Specialty.joins(:doctors).where.not(doctors: {id: nil}).uniq
+    @doctors = Doctor.left_outer_joins(:offers).where.not(offers: {id: nil}).uniq
+    @specialities = Specialty.joins(:doctors).where.not(doctors: {id: nil}).uniq.sort
     @doctors_quartet = @doctors.each_slice(4).to_a
-
     unless params[:query].nil?
-      @selected_doctors = Doctor.joins(:specialties).left_outer_joins(:offers).where.not(offers: {id: nil}).where(specialties: {name: params[:query]})
+      @selected_doctors = Doctor.joins(:specialties).left_outer_joins(:offers).where.not(offers: {id: nil}).where(specialties: {name: params[:query]}).uniq
       @selected_quartet = @selected_doctors.each_slice(4).to_a
     end
   end

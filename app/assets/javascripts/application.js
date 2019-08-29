@@ -51,10 +51,6 @@ initialize_calendar = function() {
 
 $(document).ready(initialize_calendar);
 
-$( ".doctor-form" ).select2({
-    theme: "bootstrap"
-});
-
 
 $(document).ready(function(){
   // Turn on js-selectable class so that it becomes SELCT 2 tag
@@ -65,7 +61,6 @@ $(document).ready(function(){
   });
 
  $('#query').on("change", () => {
-   console.log("Chegou aqui")
    $( "#search" ).click();
  });
 });
