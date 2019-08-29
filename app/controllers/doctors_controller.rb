@@ -38,6 +38,7 @@ class DoctorsController < ApplicationController
 
   def show
     set_doctor
+    @review = Review.new
   end
 
   def edit
