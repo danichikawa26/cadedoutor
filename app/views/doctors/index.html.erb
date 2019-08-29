@@ -25,6 +25,14 @@
   <% end %>
   <br>
   <br>
+<!-- -------------------------------TESTE-INFOBOX----------------------------------------->
+  <% doc = Doctor.find(1) %>
+  <div class="doctor-infobox">
+    <div class="arrow"></div>
+    <div class="doctor-box">
+    </div>
+  </div>
+<!-- -------------------------------TESTE-INFOBOX----------------------------------------->
 
   <% if params[:query].nil? || (params[:query] == '') %>
 

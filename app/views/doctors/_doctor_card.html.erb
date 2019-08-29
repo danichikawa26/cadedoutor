@@ -1,10 +1,5 @@
 <div class="col-3">
-  <%= link_to doctor_path(doctor),
-    class:
-      "doctor-card
-      data-#{doctor.user.first_name}
-      data-#{doctor.user.last_name} "
-  do %>
+  <%= link_to doctor_path(doctor), class: "doctor-card", data: {id: "#{doctor.id}"} do %>
     <div class="card">
         <img class="avatar" src="https://source.unsplash.com/900x900/?nurse,<%= rand(200) %>"
           alt="profile picture">
