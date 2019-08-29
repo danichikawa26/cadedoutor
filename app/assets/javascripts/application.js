@@ -97,7 +97,16 @@ $(document).ready(function() {
 });
 
 //select2
-$( ".doctor-form" ).select2({
-    theme: "bootstrap"
-});
 
+$(document).ready(function(){
+  // Turn on js-selectable class so that it becomes SELCT 2 tag
+  $('#query').select2({
+    width: 450,
+
+    // If you are using Bootstrap, please add　`theme: "bootstrap"` too.
+  });
+
+ $('#query').on("change", () => {
+   $( "#search" ).click();
+ });
+});

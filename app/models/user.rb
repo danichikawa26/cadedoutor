@@ -13,6 +13,8 @@ class User < ApplicationRecord
   belongs_to :doctor, dependent: :destroy, optional: true
   has_many :consultations, dependent: :destroy
 
+  mount_uploader :photo, PhotoUploader
+
   # before_destroy :destroy_doctor, prepend: true
 
   # private

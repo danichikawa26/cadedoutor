@@ -3,108 +3,61 @@
     <h1>Book your appointment now!</h1>
     <p>Choose from several qualified doctors to help in your recovery process.</p>
     <div class="flex form-inline">
-      <%= form_tag doctors_path, method: :get do %>
+      <%= form_tag doctors_path(anchor: 'search-results'), method: :get do %>
 
         <%= select_tag 'query', options_from_collection_for_select(@specialities, 'name', 'name'),
-         class: 'form-control doctor-form' %>
+         class: 'form-control doctor-form select2' %>
 
-        <%= submit_tag "Search", class: "btn btn-flat" %>
+        <%= submit_tag "Search", class: "btn btn-ghost ml-3", id: 'search' %>
       <% end %>
     </div>
   </div>
 </div>
-<div class="container">
+<div class="container mt-navbar">
   <br>
   <br>
-  <div>
-    <h2>How it works</h2>
-    <div class="cards">
-      <div class="card">
-        <img src="https://image.flaticon.com/icons/svg/387/387572.svg" alt="search">
-        <div class="container-bottom">
-          <div class="container-txt">
-            <h3>Search for specialists</h3>
-            <p>Lorem ipsum</p>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://image.flaticon.com/icons/svg/201/201565.svg" alt="learn">
-        <div class="container-bottom">
-          <div class="container-txt">
-            <h3>Book a consultation</h3>
-            <p>Lorem ipsum</p>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://image.flaticon.com/icons/svg/387/387569.svg" alt="product">
-        <div class="container-bottom">
-          <div class="container-txt">
-            <h3>Review your doctor</h3>
-            <p>Lorem ipsum</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
+  <% unless user_signed_in? %>
+    <%= render 'explanation_cards' %>
   <br>
   <br>
   <hr>
+  <% end %>
   <br>
   <br>
+
 
   <% if params[:query].nil? || (params[:query] == '') %>
 
     <h2>Professionals from our community</h2>
-    <div class="row" id="result">
-      <% @doctors.each do |doctor| %>
-        <% if current_user != doctor.user %>
-        <%= link_to doctor_path(doctor) do %>
-          <div class="col-3">
-            <div class="card">
-                <img class="avatar" src="https://source.unsplash.com/900x900/?nurse,<%= rand(200) %>"
-                  alt="profile picture">
-                <div class="container-bottom">
-                  <div class="container-txt">
-                    <h3><%= "#{doctor.user.first_name} #{doctor.user.last_name}" %></h3>
-                    <% doctor.specialties.each do |spec| %>
-                      <p><%= spec.name  %></p>
-                    <% end %>
-                  </div>
-              </div>
-            </div>
+    <% @doctors_quartet.each do |quartet| %>
+      <div class="row">
+        <% position = 1 %>
+        <% quartet.each do |doctor| %>
+          <% if current_user != doctor.user %>
+            <%= render 'doctor_card', doctor: doctor, position: position %>
           <% end %>
-        </div>
+        <% position += 1 %>
         <% end %>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
 
   <% else %>
 
-    <h2><%= params[:query].capitalize %> professionals</h2>
-    <div class="row">
-      <% @selected_doctors.each do |doctor| %>
-        <% if current_user != doctor.user %>
-        <%= link_to doctor_path(doctor) do %>
-          <div class="col-3">
-            <div class="card">
-                <img class="avatar" src="https://source.unsplash.com/900x900/?nurse,<%= rand(200) %>"
-                  alt="profile picture">
-                <div class="container-bottom">
-                  <div class="container-txt">
-                    <h3><%= "#{doctor.user.first_name} #{doctor.user.last_name}" %></h3>
-                    <% doctor.specialties.each do |spec| %>
-                      <p><%= spec.name  %></p>
-                    <% end %>
-                  </div>
-              </div>
-            </div>
+    <h2><a id="search-results"></a><%= params[:query].capitalize %> professionals</h2>
+      <% @selected_quartet.each do |quartet| %>
+        <div class="row">
+        <% position = 1 %>
+          <% quartet.each do |doctor| %>
+            <% if current_user != doctor.user %>
+              <%= render 'doctor_card', doctor: doctor, position: position %>
+            <% end %>
+          <% position += 1 %>
           <% end %>
         </div>
-        <% end %>
       <% end %>
-    </div>
 
   <% end %>
+<br>
+<br>
 </div>
