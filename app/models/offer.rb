@@ -1,4 +1,5 @@
 class Offer < ApplicationRecord
+  attr_accessor :date_range
   belongs_to :doctor
   has_many :consultations, dependent: :destroy
   belongs_to :specialty
