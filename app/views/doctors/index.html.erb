@@ -6,9 +6,9 @@
       <%= form_tag doctors_path, method: :get do %>
 
         <%= select_tag 'query', options_from_collection_for_select(@specialities, 'name', 'name'),
-         class: 'form-control doctor-form' %>
+         class: 'form-control doctor-form select2' %>
 
-        <%= submit_tag "Search", class: "btn btn-flat" %>
+        <%= submit_tag "Search", class: "btn btn-flat d-none", id: 'search' %>
       <% end %>
     </div>
   </div>
@@ -25,37 +25,7 @@
   <% end %>
   <br>
   <br>
-<!-- -------------------------------TESTE-INFOBOX----------------------------------------->
-  <% doc = Doctor.find(15) %>
-  <div class="doctor-infobox">
-    <div class="arrow"></div>
-    <div class="container doctor-box">
-      <p class="font-dark-blue font-bold">Following availabilities:</p>
-      <div class="row">
-        <% doc.offers[0..2].each do |offer| %>
-          <div class="card-flex flex-grow-1">
-              <h5 class="font-black font-bold">
-                <%= offer.start_date.strftime("%d/%m/%Y") %> -
-                <%= offer.start_date.strftime('%A') %>
-              </h5>
-              <p>
-                <%= offer.start_date.strftime("%H:%M") %> -
-                <%= offer.end_date.strftime("%H:%M") %>
-              </p>
-              <%= link_to 'BOOK', offer_consultations_path(offer), class: 'btn font-bold' %>
-            <p></p>
-          </div>
-        <% end %>
-        <%= link_to doctor_path(doc), method: :post, class: "card-flex card-full-calendar flex-grow-0" do  %>
-          <!-- <div class="card-flex card-full-calendar flex-grow-0"> -->
-            <h5><i class="fas fa-plus"></i></h5>
-            <p>see full calendar</p>
-          <!-- </div> -->
-        <% end %>
-      </div>
-    </div>
-  </div>
-<!-- -------------------------------TESTE-INFOBOX----------------------------------------->
+
 
   <% if params[:query].nil? || (params[:query] == '') %>
 

@@ -3,16 +3,13 @@ class DoctorsController < ApplicationController
   before_action :set_doctor, only: [:show, :edit, :update, :destroy]
 
   def index
-    @specialities = Specialty.all
-    @doctors = Doctor.all
+    @doctors = Doctor.left_outer_joins(:offers).where.not(offers: {id: nil})
+    @specialities = Specialty.joins(:doctors).where.not(doctors: {id: nil}).uniq
     @doctors_quartet = @doctors.each_slice(4).to_a
-
     unless params[:query].nil?
-      @selected_doctors = @doctors.select do |doc|
-        doc_spec = doc.specialties[0].name
-        query = params[:query].capitalize
 
-        doc_spec.include?(query)
+        @selected_doctors = Doctor.joins(:specialties).left_outer_joins(:offers).where.not(offers: {id: nil}).where(specialties: {name: params[:query]})
+
       end
       @selected_quartet = @selected_doctors.each_slice(4).to_a
     end
@@ -80,4 +77,5 @@ class DoctorsController < ApplicationController
   def set_doctor
     @doctor = Doctor.find(params[:id])
   end
+
 end
