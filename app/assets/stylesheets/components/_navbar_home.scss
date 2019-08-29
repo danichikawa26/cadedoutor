@@ -1,6 +1,5 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background-color: white;
   transition: 0.5s background-color ease;
 }
 
@@ -22,34 +21,9 @@
 }
 
 .navbar-lewagon-white {
+  background-color: white;
 }
 
 .navbar-light .navbar-nav .nav-link {
   color: white;
-}
-
-.navbar-pages {
-  display: flex;
-  align-items: center;
-}
-
-.navbar-pages .tabs {
-  display: flex;
-  align-items: center;
-  height: 68px;
-  padding-left: 15px;
-  padding-right: 15px;
-  min-width: 160px;
-  margin-right: 2px;
-  text-align: center
-}
-
-.tabs a {
-
-}
-
-.tab_selected {
-  border-bottom: 3px solid $dark-blue;
-  font-weight: bold;
-  color: $black;
 }
