@@ -1,4 +1,5 @@
 import 'bootstrap';
+import { initUpdateNavbarOnScroll } from '../components/navbar_home';
 import { initUpdateNavbarOnScroll } from '../components/navbar';
 import { showDoctorInfobox } from '../components/doctor-infobox';
 import "../plugins/flatpickr";
