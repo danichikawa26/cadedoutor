@@ -11,12 +11,12 @@
     <%= stylesheet_link_tag 'application-print', media: 'print' %>
   </head>
   <body>
-    <% if current_page?(root_path) %>
+<!--     <% if current_page?(root_path) %>
       <%= render 'shared/navbar_home'%>
     <% else %>
-      <%= render 'shared/navbar' %>
-    <% end %>
+    <% end %> -->
 
+      <%= render 'shared/navbar' %>
 
     <%= yield %>
     <%= javascript_include_tag 'application' %>
