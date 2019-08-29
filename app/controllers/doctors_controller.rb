@@ -6,11 +6,9 @@ class DoctorsController < ApplicationController
     @doctors = Doctor.left_outer_joins(:offers).where.not(offers: {id: nil})
     @specialities = Specialty.joins(:doctors).where.not(doctors: {id: nil}).uniq
     @doctors_quartet = @doctors.each_slice(4).to_a
+
     unless params[:query].nil?
-
-        @selected_doctors = Doctor.joins(:specialties).left_outer_joins(:offers).where.not(offers: {id: nil}).where(specialties: {name: params[:query]})
-
-      end
+      @selected_doctors = Doctor.joins(:specialties).left_outer_joins(:offers).where.not(offers: {id: nil}).where(specialties: {name: params[:query]})
       @selected_quartet = @selected_doctors.each_slice(4).to_a
     end
   end
