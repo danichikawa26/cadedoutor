@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'reviews/create'
   devise_for :views
   root to: 'doctors#index' #index all offers, params[user_id] == nil
 
@@ -7,7 +8,9 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[show]
 
-  resources :doctors
+  resources :doctors do
+    resources :reviews, only: [:create]
+  end
 
   resources :consultations, only: %i[index destroy] #show all consultations of a logged in patient; deletes consultation
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_27_181724) do
+ActiveRecord::Schema.define(version: 2019_08_29_121020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,15 @@ ActiveRecord::Schema.define(version: 2019_08_27_181724) do
     t.index ["specialty_id"], name: "index_offers_on_specialty_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.text "content"
+    t.integer "rating"
+    t.bigint "doctor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["doctor_id"], name: "index_reviews_on_doctor_id"
+  end
+
   create_table "specialties", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -97,5 +106,6 @@ ActiveRecord::Schema.define(version: 2019_08_27_181724) do
   add_foreign_key "doctors", "users"
   add_foreign_key "offers", "doctors"
   add_foreign_key "offers", "specialties"
+  add_foreign_key "reviews", "doctors"
   add_foreign_key "users", "doctors"
 end

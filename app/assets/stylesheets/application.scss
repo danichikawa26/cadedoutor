@@ -1,6 +1,7 @@
 /*
 *= require select2
 *= require select2-bootstrap
+*= require fullcalendar
 */
 
 // Graphical variables
@@ -17,5 +18,3 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
-
-@import "fullcalendar";
