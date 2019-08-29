@@ -49,6 +49,14 @@ initialize_calendar = function() {
       },
 
       eventDrop: function(offer, delta, revertFunc) {
+        const range_date = document.querySelector('.range_date_input');
+        const start_date = document.querySelector('.start_date_input');
+        const end_date = document.querySelector('.end_date_input');
+
+        start_date.value = start.format();
+        end_date.value = end.format();
+        range_date.value = `${start.format()} - ${end.format()}`
+
         offer_data = {
           offer: {
             id: offer.id,
