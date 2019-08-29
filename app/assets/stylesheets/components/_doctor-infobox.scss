@@ -1,0 +1,20 @@
+.doctor-box {
+  background-color: $light-blue;
+  // height: 100px;
+  border-radius: 10px;
+  position: relative;
+  p {
+    padding: 16px 0 0;
+  }
+}
+
+.arrow {
+  background-color: $light-blue;
+  height: 30px;
+  width: 30px;
+  border-radius: 4px;
+  transform: rotate(45deg);
+  position: relative;
+  top: 15px;
+  left: 120px;
+}
