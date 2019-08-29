@@ -6,9 +6,9 @@
       <%= form_tag doctors_path, method: :get do %>
 
         <%= select_tag 'query', options_from_collection_for_select(@specialities, 'name', 'name'),
-         class: 'form-control doctor-form' %>
+         class: 'form-control doctor-form select2' %>
 
-        <%= submit_tag "Search", class: "btn btn-flat" %>
+        <%= submit_tag "Search", class: "btn btn-flat d-none", id: 'search' %>
       <% end %>
     </div>
   </div>
@@ -84,7 +84,7 @@
 
     <h2><%= params[:query].capitalize %> professionals</h2>
     <div class="row">
-      <% @selected_doctors.each do |doctor| %>
+      <% @doctors.each do |doctor| %>
         <% if current_user != doctor.user %>
         <%= link_to doctor_path(doctor) do %>
           <div class="col-3">
