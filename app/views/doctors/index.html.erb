@@ -3,7 +3,7 @@
     <h1>Book your appointment now!</h1>
     <p>Choose from several qualified doctors to help in your recovery process.</p>
     <div class="flex form-inline">
-      <%= form_tag doctors_path, method: :get do %>
+      <%= form_tag doctors_path(anchor: 'search-results'), method: :get do %>
 
         <%= select_tag 'query', options_from_collection_for_select(@specialities, 'name', 'name'),
          class: 'form-control doctor-form select2' %>
@@ -32,26 +32,32 @@
     <h2>Professionals from our community</h2>
     <% @doctors_quartet.each do |quartet| %>
       <div class="row">
+        <% position = 1 %>
         <% quartet.each do |doctor| %>
           <% if current_user != doctor.user %>
-            <%= render 'doctor_card', doctor: doctor %>
+            <%= render 'doctor_card', doctor: doctor, position: position %>
           <% end %>
+        <% position += 1 %>
         <% end %>
       </div>
     <% end %>
 
   <% else %>
 
-    <h2><%= params[:query].capitalize %> professionals</h2>
-    <div class="row">
+    <h2><a id="search-results"></a><%= params[:query].capitalize %> professionals</h2>
       <% @selected_quartet.each do |quartet| %>
-        <% quartet.each do |doctor| %>
-          <% if current_user != doctor.user %>
-            <%= render 'doctor_card', doctor: doctor %>
+        <div class="row">
+        <% position = 1 %>
+          <% quartet.each do |doctor| %>
+            <% if current_user != doctor.user %>
+              <%= render 'doctor_card', doctor: doctor, position: position %>
+            <% end %>
+          <% position += 1 %>
           <% end %>
-        <% end %>
+        </div>
       <% end %>
-    </div>
 
   <% end %>
+<br>
+<br>
 </div>
