@@ -1,0 +1,16 @@
+<div class="col-3">
+  <%= link_to doctor_path(doctor), class: "doctor-card", data: {id: "#{doctor.id}"} do %>
+    <div class="card">
+        <img class="avatar" src="https://source.unsplash.com/900x900/?nurse,<%= rand(200) %>"
+          alt="profile picture">
+        <div class="container-bottom">
+          <div class="container-txt">
+            <h3><%= "#{doctor.user.first_name} #{doctor.user.last_name}" %></h3>
+            <% doctor.specialties.each do |spec| %>
+              <p><%= spec.name  %></p>
+            <% end %>
+          </div>
+      </div>
+    </div>
+  <% end %>
+</div>
