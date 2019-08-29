@@ -10,7 +10,7 @@ const showDoctorInfobox = () => {
       const docID = docCard.dataset.id;
       const row = event.currentTarget.parentElement.parentElement
       fetchJSONAndInsert(docID, row, pos);
-      docCard.scrollIntoView();
+      docCard.scrollIntoView({block: "end", behavior: "smooth"});
     });
   });
 }
