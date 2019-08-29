@@ -5,7 +5,7 @@ class DoctorsController < ApplicationController
   def index
     @specialities = Specialty.all
     @doctors = Doctor.all
-    @doctors_quartet = Doctor.all.each_slice(4).to_a
+    @doctors_quartet = @doctors.each_slice(4).to_a
 
     unless params[:query].nil?
       @selected_doctors = @doctors.select do |doc|

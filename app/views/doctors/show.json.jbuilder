@@ -5,5 +5,5 @@ json.doctor do
   json.address @doctor.address
   json.city @doctor.user.city
   json.register @doctor.professional_register
-  json.offers @doctor.offers
+  json.offers @doctor.offers[0..2]
 end

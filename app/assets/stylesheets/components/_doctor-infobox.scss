@@ -1,12 +1,15 @@
 .doctor-box {
-  background-color: $light-purple;
-  height: 100px;
+  background-color: $light-blue;
+  // height: 100px;
   border-radius: 10px;
   position: relative;
+  p {
+    padding: 16px 0 0;
+  }
 }
 
 .arrow {
-  background-color: $light-purple;
+  background-color: $light-blue;
   height: 30px;
   width: 30px;
   border-radius: 4px;

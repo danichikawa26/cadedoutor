@@ -4,3 +4,4 @@ json.array! @my_consultations do |consultation|
   json.end consultation.offer.end_date
   json.title consultation.offer.specialty.name
 end
+
