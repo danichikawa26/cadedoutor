@@ -18,23 +18,25 @@
   </div>
 <% end %>
 <div class="container mt-navbar">
-  <div style="display:flex;flex-direction: column; align-items:center;">
-    <div class="row">
-      <div class="col-sm-12" style="margin-left: 0;">
-        <h1>Search for a specialty and find the best doctors</h1>
-        <div class="flex form-inline" style="margin-top: 30px; justify-content: space-around;">
-          <%= form_tag doctors_path(anchor: 'search-results'), method: :get do %>
+  <% if user_signed_in? %>
+    <div style="display:flex;flex-direction: column; align-items:center;">
+      <div class="row">
+        <div class="col-sm-12" style="margin-left: 0;">
+          <h1>Search for a specialty and find the best doctors</h1>
+          <div class="flex form-inline" style="margin-top: 30px; justify-content: space-around;">
+            <%= form_tag doctors_path(anchor: 'search-results'), method: :get do %>
 
-            <%= select_tag 'query', options_from_collection_for_select(@specialities, 'name', 'name'),
-             class: 'form-control doctor-form select2' %>
+              <%= select_tag 'query', options_from_collection_for_select(@specialities, 'name', 'name'),
+               class: 'form-control doctor-form select2' %>
 
-            <%= submit_tag "Search", class: "btn btn-ghost ml-3", id: 'search' %>
-          <% end %>
+              <%= submit_tag "Search", class: "btn btn-ghost ml-3", id: 'search' %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <br>
+    <br>
+  <% end %>
   <br>
   <% unless user_signed_in? %>
     <%= render 'explanation_cards' %>
