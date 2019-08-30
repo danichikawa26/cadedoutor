@@ -35,6 +35,7 @@ class DoctorsController < ApplicationController
 
   def show
     set_doctor
+    @day = 'Friday'
     @review = Review.new
   end
 
