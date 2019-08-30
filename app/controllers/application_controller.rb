@@ -8,7 +8,18 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    consultations_path
+    if current_user.doctor
+      consultations_path
+    else
+      my_consultations_path
+    end
   end
 
+  def after_update_path_for(resource)
+    if current_user.doctor
+      consultations_path
+    else
+      my_consultations_path
+    end
+  end
 end
