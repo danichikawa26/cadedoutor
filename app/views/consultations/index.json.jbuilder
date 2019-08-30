@@ -1,4 +1,6 @@
-json.array! @offers do |offer|
+offers = @offers.select(&:available)
+
+json.array! offers do |offer|
   json.extract! offer, :id
   json.start offer.start_date
   json.end offer.end_date

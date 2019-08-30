@@ -1,41 +1,51 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1548101307-a757d5f06d27?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80');">
+<% unless user_signed_in? %>
+  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1548101307-a757d5f06d27?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80'); margin-top: 78px;">
 
-  <div class="container">
-    <h1>Book your appointment now!</h1>
-    <p>Choose from several qualified doctors to help in your recovery process.</p>
-    <div class="flex form-inline">
-      <%= form_tag doctors_path(anchor: 'search-results'), method: :get do %>
+    <div class="container mt-navbar">
+      <h1>Book your appointment now!</h1>
+      <p>Choose from several qualified doctors to help in your recovery process.</p>
+      <div class="flex form-inline">
+        <%= form_tag doctors_path(anchor: 'search-results'), method: :get do %>
 
-        <%= select_tag 'query', options_from_collection_for_select(@specialities, 'name', 'name'),
-         class: 'form-control doctor-form select2' %>
+          <%= select_tag 'query', options_from_collection_for_select(@specialities, 'name', 'name'),
+           class: 'form-control doctor-form select2' %>
 
-        <%= submit_tag "Search", class: "btn btn-ghost ml-3", id: 'search' %>
-      <% end %>
+          <%= submit_tag "Search", class: "btn btn-ghost ml-3", id: 'search' %>
+        <% end %>
+      </div>
+    </div>
+  <%= render 'special_offer' %>
+  </div>
+<% end %>
+<div class="container mt-navbar">
+  <div style="display:flex;flex-direction: column; align-items:center;">
+    <div class="row">
+      <div class="col-sm-12" style="margin-left: 0;">
+        <h1>Search for a specialty and find the best doctors</h1>
+        <div class="flex form-inline" style="margin-top: 30px; justify-content: space-around;">
+          <%= form_tag doctors_path(anchor: 'search-results'), method: :get do %>
+
+            <%= select_tag 'query', options_from_collection_for_select(@specialities, 'name', 'name'),
+             class: 'form-control doctor-form select2' %>
+
+            <%= submit_tag "Search", class: "btn btn-ghost ml-3", id: 'search' %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
-
-  <% unless user_signed_in? %>
-    <%= render 'special_offer' %>
-  <% end %>
-
-</div>
-<div class="container mt-navbar">
   <br>
   <br>
-
   <% unless user_signed_in? %>
     <%= render 'explanation_cards' %>
   <br>
   <br>
   <hr>
   <% end %>
-  <br>
-  <br>
-
 
   <% if params[:query].nil? || (params[:query] == '') %>
 
-    <h2>Professionals from our community</h2>
+    <h2 style="margin-top: 30px;">Professionals from our community</h2>
     <% @doctors_quartet.each do |quartet| %>
       <div class="row">
         <% position = 1 %>

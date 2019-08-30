@@ -72,9 +72,11 @@ const insertHTML = (row, doc, pos) => {
 
 const makeCards = (doc) => {
   let cardsHTML = ""
+  debugger;
   doc.offers.forEach((offer) => {
     const date = offer.start_date.replace(/T.*/,"");
     const day = offer.weekday;
+
     const sTime = offer.start_date.replace(/^.*T/,"").replace(/:\d\d.\d\d\d-\d\d:\d\d/,"");
     const eTime = offer.end_date.replace(/^.*T/,"").replace(/:\d\d.\d\d\d-\d\d:\d\d/,"");
 
