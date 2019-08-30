@@ -5,7 +5,7 @@ class Doctor::OffersController < ApplicationController
 
   def create
     @offer = Offer.new(offer_params)
-    @offer.doctor_id = current_user.id
+    @offer.doctor_id = current_user.doctor_id
     if @offer.save
       redirect_to consultations_path
     else
