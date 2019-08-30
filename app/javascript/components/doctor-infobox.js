@@ -74,7 +74,7 @@ const makeCards = (doc) => {
   let cardsHTML = ""
   doc.offers.forEach((offer) => {
     const date = offer.start_date.replace(/T.*/,"");
-    const day = 'Friday';
+    const day = offer.weekday;
     const sTime = offer.start_date.replace(/^.*T/,"").replace(/:00.000-03:00/,"");
     const eTime = offer.end_date.replace(/^.*T/,"").replace(/:00.000-03:00/,"");
 
