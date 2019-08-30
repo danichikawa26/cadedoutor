@@ -1,0 +1,36 @@
+<div class="container mt-navbar">
+    <h1>Hello, <%= current_user.first_name %> </h1>
+    <br>
+    <br>
+      <h2>Your consultations
+        <% if current_user.doctor %>
+          as a patient
+        <% end %>
+    </h2>
+    <br>
+      <% if @my_consultations[0].nil? %>
+        <div class="notification">
+          <img class="avatar-large" src="https://image.flaticon.com/icons/svg/1828/1828975.svg" alt="exclamation mark">
+          <div class="notification-content">
+            <p>You currently have no scheduled consultations</p>
+          </div>
+        </div>
+      <% end %>
+      <% @my_consultations.each do |consultation| %>
+      <div class="notification">
+        <img class="avatar-large" src="https://source.unsplash.com/900x900/?nurse,<%= rand(200) %>"
+          alt="profile picture">
+        <div class="notification-content">
+          <p><small><%= consultation.offer.start_date %> - <%= consultation.offer.end_date %></small></p>
+          <p><strong><%= consultation.offer.specialty.name %></strong> consultation with doctor <strong><%= consultation.offer.doctor.user.first_name %> <%= consultation.offer.doctor.user.last_name %></strong></p>
+        </div>
+        <div class="notification-actions">
+          <%= link_to 'Cancel appointment', consultation_path(consultation), method: :delete, data: { confirm: 'Are you sure you want to cancel?' } %>
+        </div>
+      </div>
+      <% end %>
+    <%= link_to 'Add new consultation', doctors_path, class: "btn btn-info" %>
+    <br>
+    <br>
+</div>
+

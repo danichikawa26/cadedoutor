@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
 
   resources :consultations, only: %i[index destroy] #show all consultations of a logged in patient; deletes consultation
+  get "my_consultations", to: "consultations#my_consultations"
 
   resources :offers, only: %i[index show] do #all offers by a given doctor, if params[:user_id] exists
     resources :consultations, only: %i[create] #patient can create a new consultation clicking on an offer

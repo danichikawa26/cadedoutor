@@ -18,6 +18,23 @@ class ConsultationsController < ApplicationController
     @offers = current_user.doctor.offers unless current_user.doctor.nil?
   end
 
+    def my_consultations
+    @consultations = []
+    if current_user.doctor.nil?
+      @my_consultations = current_user.consultations
+    else
+      @my_consultations = current_user.consultations
+      all_consultations = Consultation.all
+      all_consultations.each do |consultation|
+        @consultations << consultation if consultation.offer.doctor == current_user.doctor
+      end
+    end
+    @my_consultations
+    @consultations
+    @offer = Offer.new
+    @offers = current_user.doctor.offers unless current_user.doctor.nil?
+  end
+
   def destroy
     @consultation = Consultation.find(params[:id])
     @consultation.destroy
