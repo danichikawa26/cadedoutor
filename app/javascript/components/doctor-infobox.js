@@ -25,7 +25,7 @@ const removeInfobox = () => {
 
 
 const fetchJSONAndInsert = (docID, row, pos) => {
-  fetch(`http://localhost:3000/doctors/${docID}.json`)
+  fetch(`/doctors/${docID}.json`)
     .then(response => response.json())
     .then((data) => {
       const doc = data.doctor;
@@ -87,12 +87,20 @@ const makeCards = (doc) => {
             ${sTime} -\
             ${eTime}\
           </p>\
-          <a class="btn font-bold" data-method="post" href="/offers/${offer.id}/consultations">BOOK</a>\
+          <a rel="nofollow" data-method="post" href="/offers/${offer.id}/consultations">
+                    <button class="blearn-more mt-3">
+                        <div class="bcircle">
+                          <span class="bicon barrow"></span>
+                        </div>
+                        <p class="bbutton-text">BOOK</p>
+                      </button>
+          </a>
         <p></p>\
       </div>`
     });
   return cardsHTML
 }
+          // <a class="btn font-bold" data-method="post" href="/offers/${offer.id}/consultations">BOOK</a>\
 
 
 const arrowPosition = (pos) => {
