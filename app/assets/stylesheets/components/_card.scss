@@ -121,7 +121,14 @@
   width: auto;
   padding: 5px;
   h5 {
-    margin: 0;
+    font-size: 16px;
+    padding: 0px 15px 0px;
+    margin: 20px 0px 0px;
+  }
+  p {
+    font-size: 15px !important;
+    margin: 3px;
+    padding: 7px 10px !important;
   }
 }
 

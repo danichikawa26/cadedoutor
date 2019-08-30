@@ -72,7 +72,6 @@ const insertHTML = (row, doc, pos) => {
 
 const makeCards = (doc) => {
   let cardsHTML = ""
-  debugger;
   doc.offers.forEach((offer) => {
     const date = offer.start_date.replace(/T.*/,"");
     const day = offer.weekday;
