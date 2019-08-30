@@ -25,7 +25,7 @@ const removeInfobox = () => {
 
 
 const fetchJSONAndInsert = (docID, row, pos) => {
-  fetch(`http://localhost:3000/doctors/${docID}.json`)
+  fetch(`/doctors/${docID}.json`)
     .then(response => response.json())
     .then((data) => {
       const doc = data.doctor;
