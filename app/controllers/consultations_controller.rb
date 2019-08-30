@@ -41,8 +41,9 @@ class ConsultationsController < ApplicationController
     @consultation.offer.available = true
     @consultation.offer.save
     if current_user.doctor
-      consultations_path
+      redirect_to consultations_path
     else
+    raise
       redirect_to my_consultations_path
     end
   end
