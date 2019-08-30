@@ -21,7 +21,7 @@
         <img class="avatar-large" src="https://source.unsplash.com/900x900/?nurse,<%= rand(200) %>"
           alt="profile picture">
         <div class="notification-content">
-          <p><small><%= consultation.offer.start_date %> - <%= consultation.offer.end_date %></small></p>
+          <p><small><%= consultation.offer.start_date.to_s.gsub(/\d{4}-\d\d-\d\d /,"").gsub(/:\d\d -0300/,"") %> - <%= consultation.offer.end_date.to_s.gsub(/\d{4}-\d\d-\d\d /,"").gsub(/:\d\d -0300/,"") %></small></p>
           <p><strong><%= consultation.offer.specialty.name %></strong> consultation with doctor <strong><%= consultation.offer.doctor.user.first_name %> <%= consultation.offer.doctor.user.last_name %></strong></p>
         </div>
         <div class="notification-actions">

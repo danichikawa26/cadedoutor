@@ -1,6 +1,8 @@
 const bgOrangeToggle = () => {
   const offerBanner = document.querySelector('#banner')
-  offerBanner.classList.toggle("bg-orange");
+  if (offerBanner !== null) {
+    offerBanner.classList.toggle("bg-orange");
+  }
 }
 
 const bgOrange = () => {
