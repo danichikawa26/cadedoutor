@@ -6,7 +6,11 @@ import "../plugins/flatpickr";
 import { initAutocomplete } from '../plugins/init_autocomplete'
 import { changeSelect2, initSelect2 } from '../plugins/select2'
 
+import { bgOrange } from '../components/bg-orange';
+
 // initUpdateNavbarOnScroll();
 initAutocomplete();
 changeSelect2();
 showDoctorInfobox();
+
+bgOrange();
