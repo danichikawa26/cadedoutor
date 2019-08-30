@@ -40,7 +40,11 @@ class ConsultationsController < ApplicationController
     @consultation.destroy
     @consultation.offer.available = true
     @consultation.offer.save
-    redirect_to my_consultations_path
+    if current_user.doctor
+      consultations_path
+    else
+      redirect_to my_consultations_path
+    end
   end
 
   def create
