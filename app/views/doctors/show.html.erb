@@ -38,7 +38,16 @@
              -
             <%= offer.end_date.to_s.gsub(/\d{4}-\d\d-\d\d /,"").gsub(/:\d\d -0300/,"")  %>
                   </h5>
-                  <%= link_to  "BOOK", offer_consultations_path(offer), class: "btn card-flex-btn mt-2", method: "post" %>
+
+                  <%= link_to offer_consultations_path(offer), method: "post" do %>
+                    <button class="blearn-more mt-3">
+                        <div class="bcircle">
+                          <span class="bicon barrow"></span>
+                        </div>
+                        <p class="bbutton-text">BOOK</p>
+                      </button>
+                    <% end %>
+                  <%#= link_to  "BOOK", offer_consultations_path(offer), class: "btn card-flex-btn mt-2", method: "post" %>
                 <p></p>
               </div>
       <% end %>
