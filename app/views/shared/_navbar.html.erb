@@ -9,7 +9,7 @@
       </div>
       <% if current_user.doctor  %>
         <div class="tabs <%#= "tab_selected" if current_page?(consultations_path) %>">
-          <%= link_to "Agenda", "#"  %>
+          <%= link_to "Agenda", doctor_consultations_path  %>
         </div>
       <% end %>
     <% end %>
@@ -24,12 +24,12 @@
 <!--               <%= cl_image_tag("lrjqqupkwtrmdsoojw4w", :transformation=>[
 {width: 50, height: 50, gravity: :face, radius: :max, crop: :thumb}
 ]) %> -->
-              <% if current_user.photo %>
+              <% if current_user.photo.present? %>
                  <%= cl_image_tag(current_user.photo, :transformation=>[
                  {width: 50, height: 50, gravity: :face, radius: :max, crop: :thumb}
                  ]) %>
                <% else %>
-                 <%= image_tag "user-avatar.png" %>
+                 <%= image_tag "user-avatar.png", size: "50x50" %>
                <% end %>
             </div>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
