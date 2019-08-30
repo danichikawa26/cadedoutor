@@ -50,7 +50,7 @@ class ConsultationsController < ApplicationController
     if @consultation.save!
       @offer.available = false
       @offer.save
-      redirect_to consultations_path
+      redirect_to my_consultations_path
     end
   end
 

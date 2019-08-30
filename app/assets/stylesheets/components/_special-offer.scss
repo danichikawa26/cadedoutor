@@ -1,0 +1,31 @@
+.special-banner {
+  background-color: #8db4ba;
+  height: 200px;
+  p {
+    color: white;
+  }
+  img {
+    width: 300px;
+  }
+  // border-top: $light-purple 2px solid;
+}
+
+.special-offer {
+  text-align: center;
+  h3 {
+    color: white;
+    padding: 10px 0 0;
+  }
+  p {
+    color: white;
+  }
+}
+
+
+.bg-orange {
+
+  .special-banner {
+    background-color: $orange;
+    // border-top: $light-purple 2px solid;
+  }
+}
