@@ -72,12 +72,12 @@ const insertHTML = (row, doc, pos) => {
 
 const makeCards = (doc) => {
   let cardsHTML = ""
+  debugger;
   doc.offers.forEach((offer) => {
     const date = offer.start_date.replace(/T.*/,"");
     const day = offer.weekday;
     const sTime = offer.start_date.replace(/^.*T/,"").replace(/:00.000-03:00/,"");
     const eTime = offer.end_date.replace(/^.*T/,"").replace(/:00.000-03:00/,"");
-
     cardsHTML += `<div class="card-flex flex-grow-1">\
           <h5 class="font-black font-bold">\
             ${date} -\

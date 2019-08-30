@@ -13,6 +13,7 @@ json.doctor do
   next_offers.sort!.reverse!
 
   json.offers next_offers[0..2] do |offer|
+    json.id offer.id
     json.start_date offer.start_date
     json.end_date offer.end_date
     json.specialty Specialty.find(offer.specialty.id).name
