@@ -30,9 +30,10 @@
   <% if current_user == @doctor.user %>
     <div class="flex mr-3">
       <%= link_to( @doctor, method: :delete, data: { confirm: 'Are you sure?' }) do %>
-        <i class="far fa-trash-alt mr-2"></i> Delete my doctor account
+        <i class="far fa-trash-alt mr-2"></i> Delete doctor account
       <% end %>
-      <%= link_to "Edit my info", edit_doctor_path(@doctor) %>
+      <br>
+      <%= link_to "Edit my info", edit_user_registration_path %>
     </div>
   <% end %>
 
