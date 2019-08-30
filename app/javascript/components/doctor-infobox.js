@@ -87,12 +87,20 @@ const makeCards = (doc) => {
             ${sTime} -\
             ${eTime}\
           </p>\
-          <a class="btn font-bold" data-method="post" href="/offers/${offer.id}/consultations">BOOK</a>\
+          <a rel="nofollow" data-method="post" href="/offers/24/consultations">
+                    <button class="blearn-more mt-3">
+                        <div class="bcircle">
+                          <span class="bicon barrow"></span>
+                        </div>
+                        <p class="bbutton-text">BOOK</p>
+                      </button>
+          </a>
         <p></p>\
       </div>`
     });
   return cardsHTML
 }
+          // <a class="btn font-bold" data-method="post" href="/offers/${offer.id}/consultations">BOOK</a>\
 
 
 const arrowPosition = (pos) => {
