@@ -28,15 +28,18 @@ cardiology = Specialty.find_by(name: 'Cardiology')
 
 fulano = User.new(first_name: 'Fulano', last_name: 'Branquinho', city: 'São Paulo',
   email: 'fulano@cadedoutor.com',password: 'fulano123', doctor: nil)
-dr_fulano = Doctor.new(professional_register: '5060258', address: 'Rua da Glória, 195, cj 20', user: fulano)
+phone = Faker::PhoneNumber.cell_phone
+dr_fulano = Doctor.new(professional_register: '5060258', address: 'Rua da Glória, 195, cj 20', user: fulano, phone: phone)
 fulano.doctor = dr_fulano
 dr_fulano.specialties = [cardiology]
 fulano.save!
 dr_fulano.save!
 
+
 ciclana = User.new(first_name: 'Ciclana', last_name: 'Ichigawa', city: 'São Paulo',
   email: 'ciclana@cadedoutor.com', password: 'ciclana123', doctor: nil)
-dr_ciclana = Doctor.new(professional_register: '2585060', address: 'Rua da Vitória, 591, cj 200', user: ciclana)
+phone = Faker::PhoneNumber.cell_phone
+dr_ciclana = Doctor.new(professional_register: '2585060', address: 'Rua da Vitória, 591, cj 200', user: ciclana, phone: phone)
 ciclana.doctor = dr_ciclana
 dr_ciclana.specialties = [cardiology]
 ciclana.save!
@@ -44,7 +47,8 @@ dr_ciclana.save!
 
 beltrana = User.new(first_name: 'Beltrana', last_name: 'Vasconcelos', city: 'São Paulo',
   email: 'beltrana@cadedoutor.com', password: 'beltrana123',doctor: nil)
-dr_beltrana = Doctor.new(professional_register: '2586960', address: 'Rua do Sucesso, 519, cj 220', user: beltrana)
+phone = Faker::PhoneNumber.cell_phone
+dr_beltrana = Doctor.new(professional_register: '2586960', address: 'Rua do Sucesso, 519, cj 220', user: beltrana, phone: phone)
 beltrana.doctor = dr_beltrana
 dr_beltrana.specialties = [cardiology]
 beltrana.save!
@@ -61,13 +65,18 @@ puts 'populating database with 300 doctors'
 
 
 
-
   300.times do
     user = User.new(first_name: Faker::Name.first_name , last_name: Faker::Name.last_name, city: 'São Paulo',
     email: Faker::Internet.email, password: Faker::Internet.password(min_length: 8),doctor: nil)
 
-    doctor = Doctor.new(professional_register: "#{8.times { rand(9) }}",
-    address: Faker::Address.street_address, user: user)
+    # url = "https://source.unsplash.com/900x900/?nurse,#{rand(300)}"
+    # user.remote_photo_url = url
+    # user.save
+
+
+    phone = Faker::PhoneNumber.cell_phone
+    doctor = Doctor.new(professional_register: "#{rand(452123...985412)}",
+    address: Faker::Address.street_address, user: user, phone: phone)
 
     random_specialty = Specialty.find(rand(1..115))
     user.doctor = doctor
@@ -76,14 +85,21 @@ puts 'populating database with 300 doctors'
     doctor.save!
 
     random_boolean = rand() > 0.3 ? true : false
-    random_day = rand(1..30)
-    random_hour = rand(1..12)
+    start_date = DateTime.now + rand(0..5).days + rand(1..10).hours
+    end_date = start_date + 1.hour
     rand(1..8).times do
       Offer.create(doctor: doctor, specialty: random_specialty, available: random_boolean,
-        start_date: DateTime.new(2019,8,random_day,random_hour,0),
-        end_date: DateTime.new(2019,8,random_day,random_hour + 1,0)
+        start_date: start_date,
+        end_date: end_date
       )
     end
+
+    rand(1..2).times do
+      Review.create(content: Faker::Lorem.paragraph, rating: rand(1..6), doctor: doctor)
+    end
+
+    puts "Dcotor #{user.first_name} created"
   end
 
 puts 'database has been fully populated'
+
