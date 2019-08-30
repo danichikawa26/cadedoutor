@@ -65,7 +65,7 @@ puts 'populating database with 300 doctors'
 
 
 
-  300.times do
+  30.times do
     user = User.new(first_name: Faker::Name.first_name , last_name: Faker::Name.last_name, city: 'São Paulo',
     email: Faker::Internet.email, password: Faker::Internet.password(min_length: 8),doctor: nil)
 
@@ -85,12 +85,12 @@ puts 'populating database with 300 doctors'
     doctor.save!
 
     random_boolean = rand() > 0.3 ? true : false
-    start_date = DateTime.now + rand(0..5).days + rand(1..10).hours
-    end_date = start_date + 1.hour
+
     rand(1..8).times do
+      start_date = DateTime.now + rand(0..5).days + rand(-4..8).hours
       Offer.create(doctor: doctor, specialty: random_specialty, available: random_boolean,
         start_date: start_date,
-        end_date: end_date
+        end_date: start_date + 1.hour
       )
     end
 
@@ -98,7 +98,7 @@ puts 'populating database with 300 doctors'
       Review.create(content: Faker::Lorem.paragraph, rating: rand(1..6), doctor: doctor)
     end
 
-    puts "Dcotor #{user.first_name} created"
+    puts "Doctor #{user.first_name} created"
   end
 
 puts 'database has been fully populated'
