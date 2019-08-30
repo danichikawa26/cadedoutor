@@ -4,11 +4,7 @@
     </div>
       <h1><strong><%= @doctor.user.first_name.capitalize %></strong></h1>
       <div class="doctor-title">
-        <% if @doctor.user.photo.present? %>
-          <%= cl_image_tag(doctor.user.photo, :transformation=>[ {width: 120, height: 120, gravity: :face, radius: :max, crop: :thumb} ]) %>
-        <% else %>
           <img class="avatar-larger" src="https://source.unsplash.com/900x900/?nurse,<%= rand(200) %>" alt="profile picture">
-        <% end %>
         <div style="margin: 10px 20px;">
           <div>
             <h3>
