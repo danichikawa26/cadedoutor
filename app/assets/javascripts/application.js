@@ -23,40 +23,26 @@ initialize_calendar = function() {
       editable: true,
       eventLimit: true,
       events: '/consultations.json',
+      eventColor: '#42376F',
+      eventTextColor: '#FFF',
+      defaultView: 'agendaWeek',
 
       select: function(start, end) {
-        const range_date = document.querySelector('.range_date_input');
-        const start_date = document.querySelector('.start_date_input');
-        const end_date = document.querySelector('.end_date_input');
         const modal_new = document.querySelector('#new_event');
 
-        start_date.value = start.format();
-        end_date.value = end.format();
-        range_date.value = `${start.format()} - ${end.format()}`
+        $('.start_hidden').val(moment(start).format('YYYY-MM-DD HH:mm'));
+        $('.end_hidden').val(moment(end).format('YYYY-MM-DD HH:mm'));
+        date_range_picker();
 
         modal_new.classList.add('show');
         modal_new.style.display = 'block';
 
         calendar.fullCalendar('unselect');
 
-        // const close_button = document.querySelector('.close');
-        // close_button.addEventListener('click', (event) => {
-        //   console.log(close_button);
-        //   const modal_close = document.querySelector('#new_event');
-        //   modal_close.classList.remove('show');
-        //   modal_close.style.display = 'none';
-        // });
+        // closeModal();
       },
 
       eventDrop: function(offer, delta, revertFunc) {
-        const range_date = document.querySelector('.range_date_input');
-        const start_date = document.querySelector('.start_date_input');
-        const end_date = document.querySelector('.end_date_input');
-
-        start_date.value = start.format();
-        end_date.value = end.format();
-        range_date.value = `${start.format()} - ${end.format()}`
-
         offer_data = {
           offer: {
             id: offer.id,
@@ -74,6 +60,11 @@ initialize_calendar = function() {
 
       eventClick: function(offer, jsEvent, view) {
         const modal = document.querySelector(`#edit_event_${offer.id}`);
+
+        $('.start_hidden').val(moment(offer.start).format('YYYY-MM-DD HH:mm'));
+        $('.end_hidden').val(moment(offer.end).format('YYYY-MM-DD HH:mm'));
+        date_range_picker();
+
         modal.classList.add('show');
         modal.style.display = 'block';
       }
@@ -82,6 +73,19 @@ initialize_calendar = function() {
 };
 
 $(document).ready(initialize_calendar);
+
+// const closeModal = () => {
+//   const closeButton = document.querySelector('.close');
+//   console.log(document.querySelector('.close'));
+//   closeButton.onclick = function() {
+//     console.log(closeButton);
+//     const modal_close = document.querySelector('#new_event');
+//     modal_close.classList.remove('show');
+//     modal_close.style.display = 'none';
+//   };
+// };
+
+
 
 //datarangepicker
 $(document).ready(function() {
@@ -103,6 +107,20 @@ $(document).ready(function() {
     $(this).val('');
   });
 });
+
+function date_range_picker() {
+  $('.date-range-picker').each(function(){
+    $(this).daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        alwaysShowCalendars: true,
+        startDate: moment($('.start_hidden').val(), 'YYYY-MM-DD HH:mm').toDate(),
+        endDate: moment($('.end_hidden').val(), 'YYYY-MM-DD HH:mm').toDate()
+    });
+  })
+
+  console.log('calendar set')
+};
 
 //select2
 
