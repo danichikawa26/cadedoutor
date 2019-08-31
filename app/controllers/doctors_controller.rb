@@ -22,6 +22,7 @@ class DoctorsController < ApplicationController
     @doctor.user = current_user
     unless current_user.doctor
       if @doctor.save!
+        set_specialty
         current_user.doctor = @doctor
         current_user.save!
         redirect_to doctor_path(@doctor)
@@ -47,11 +48,7 @@ class DoctorsController < ApplicationController
 
   def update
     if @doctor.update(doctor_params)
-      DoctorSpecialty.where(doctor: @doctor).destroy_all
-      params[:doctor][:specialty_ids].each do |specialty_id|
-        specialty = Specialty.find(specialty_id)
-        DoctorSpecialty.create(doctor: @doctor, specialty: specialty)
-      end
+      set_specialty
       redirect_to doctor_path(@doctor)
     else
       render :new
@@ -73,6 +70,14 @@ class DoctorsController < ApplicationController
 
   def set_doctor
     @doctor = Doctor.find(params[:id])
+  end
+
+  def set_specialty
+    DoctorSpecialty.where(doctor: @doctor).destroy_all
+    params[:doctor][:specialty_ids].each do |specialty_id|
+      specialty = Specialty.find(specialty_id)
+      DoctorSpecialty.create(doctor: @doctor, specialty: specialty)
+    end
   end
 
 end
