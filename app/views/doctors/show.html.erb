@@ -5,7 +5,7 @@
       <h1><strong><%= @doctor.user.first_name.capitalize %></strong></h1>
       <div class="doctor-title">
         <% if @doctor.user.photo.present? %>
-          <%= cl_image_tag(current_user.photo, :transformation=>[ {width: 120, height: 120, gravity: :face, radius: :max, crop: :thumb} ]) %>
+          <%= cl_image_tag(@doctor.user.photo, :transformation=>[ {width: 120, height: 120, gravity: :face, radius: :max, crop: :thumb} ]) %>
         <% else %>
           <img class="avatar-larger" src="https://source.unsplash.com/900x900/?nurse,<%= rand(200) %>" alt="profile picture">
         <% end %>
@@ -29,9 +29,6 @@
   </div>
   <% if current_user == @doctor.user %>
     <div class="flex mr-3">
-      <%= link_to( @doctor, method: :delete, data: { confirm: 'Are you sure?' }) do %>
-        <i class="far fa-trash-alt mr-2"></i> Delete doctor account
-      <% end %>
       <br>
       <%= link_to "Edit my info", edit_user_registration_path %>
     </div>
